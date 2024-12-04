@@ -11,31 +11,31 @@
             <h1>Quản Lý Sinh Viên </h1>
             <div class="box-form">
                 <h3>Name</h3>
-                <input type="text" placeholder="Nhập tên của bạn" class="input-special">
+                <input type="text" placeholder="Nhập tên của bạn" class="input-special" id="name">
             </div>
             <div class="box-form">
                 <h3>Gender</h3>
-                <input type="radio" class="input-dot">
+                <input type="radio" class="input-dot" id="nam" name="Gender">
                 <label>Nam</label>
                 <br>
                 <br>
-                <input type="radio" class="input-dot">
+                <input type="radio" class="input-dot" id="nu" name="Gender">
                 <label>Nữ</label>
             </div>
             <div class="box-form">
                 <h3>Math Score</h3>
-                <input type="number" placeholder="Nhập điểm của bạn" class="input-special">
+                <input type="number" placeholder="Nhập điểm của bạn" class="input-special" id="math">
             </div>
             <div class="box-form">
                 <h3>English Score</h3>
-                <input type="number" placeholder="Nhập điểm của bạn" class="input-special">
+                <input type="number" placeholder="Nhập điểm của bạn" class="input-special" id="english">
             </div>
             <div class="box-form">
                 <h3>Literature Score</h3>
-                <input type="number" placeholder="Nhập điểm của bạn" class="input-special">
+                <input type="number" placeholder="Nhập điểm của bạn" class="input-special" id="literature">
             </div>
             <div class="box-form">
-                <button>Create Student</button>
+                <button onclick="createStudent()">Create Student</button>
             </div>
             <div class="box-form , special">
                 <input type="text" placeholder="Enter your keyword" class="input-special">
@@ -54,7 +54,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="studentTable"> 
+                <tbody id="tbodylist"> 
                  
                 </tbody>
             </table>
