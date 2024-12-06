@@ -44,11 +44,38 @@ let initData = localStorage.getItem("students") ? JSON.parse(localStorage.getIte
 // ]
 
 const tbodyValue = document.getElementById('tbodylist');
-const nameValue = document.getElementById('name').value;
-const gender = document.querySelector('input[name="Gender"]:checked').value;
-const mathScore = parseFloat(document.getElementById('math').value);
-const englishScore = parseFloat(document.getElementById('english').value);
-const literatureScore = parseFloat(document.getElementById('literature').value);
+
+function createStudent() {
+    const nameValue = document.getElementById('name');
+    const gender = document.querySelector('input[name="Gender"]:checked');
+    const mathScore = document.getElementById('math');
+    const englishScore = document.getElementById('english');
+    const literatureScore = document.getElementById('literature');
+    const id = initData.length ? initData[initData.length - 1].id + 1 : 1;
+    const averageScore = ((mathScore + englishScore + literatureScore) / 3).toFixed(2)
+    const student = {
+        id,
+        nameValue: nameValue.value,
+        gender: gender.value,
+        mathScore: parseFloat(mathScore.value),
+        englishScore: parseFloat(englishScore.value),
+        literatureScore: parseFloat(literatureScore.value),
+        averageScore
+    };
+
+    initData.push(student);
+    localStorage.setItem("students", JSON.stringify(initData));
+    displayList(initData);
+    clearData(nameValue, gender, mathScore, englishScore, literatureScore);
+}
+
+const clearData = (nameInput, genderInput, mathScoreInput, englishScoreInput, literatureScoreInput) => {
+    nameInput.value = "";
+    genderInput.checked = false;
+    mathScoreInput.value = "";
+    englishScoreInput.value = "";
+    literatureScoreInput.value = "";
+}
 
 function displayList() {
     tbodyValue.innerHTML = '';
@@ -61,7 +88,7 @@ function displayList() {
                 <td>${student.mathScore}</td>
                 <td>${student.englishScore}</td>
                 <td>${student.literatureScore}</td>
-                <td>${parseInt(student.mathScore) + parseInt(student.englishScore) + parseInt(student.literatureScore) / 3}</td>
+                <td>${student.averageScore}</td>
                 <td>
                     <button onclick="editStudent(${index})">Sửa</button>
                     <button onclick="deleteStudent(${index})">Xóa</button>
@@ -69,30 +96,24 @@ function displayList() {
     `;
         tbodyValue.appendChild(row);
     });
-};
-displayList();
-
-function createStudent() {
-    const id = initData.length ? initData[initData.length - 1].id + 1 : 1;
-    const student = {
-        id, nameValue, gender, mathScore, englishScore, literatureScore,
-        averageScore: ((mathScore + englishScore + literatureScore) / 3).toFixed(2)
-
-    };
-    initData.push(student);
-    localStorage.setItem("student", JSON.stringify(initData));
-    displayList(initData);
-};
+}
 
 function deleteStudent(index) {
     initData.splice(index, 1);
-    localStorage.setItem("student", JSON.stringify(initData));
+    localStorage.setItem("students", JSON.stringify(initData));
     displayList();
 };
 
-function updateStudent(index) {
+// khi đã lấy ra đc student muốn sửa => gán lại các giá trị trong input  => hiện thị lại (gọi hàm display) => cập nhật giá trị mới => lưu lại lên local
+function updateStudent(idStudent) {
+    const nameValue = document.getElementById('name');
+    const gender = document.querySelector('input[name="Gender"]:checked');
+    const mathScore = document.getElementById('math');
+    const englishScore = document.getElementById('english');
+    const literatureScore = document.getElementById('literature');
 
-
+    const studentData = JSON.parse(localStorage.getItem('student'));
 
 }
 
+displayList();
