@@ -52,7 +52,7 @@ function createStudent() {
     const englishScore = document.getElementById('english');
     const literatureScore = document.getElementById('literature');
     const id = initData.length ? initData[initData.length - 1].id + 1 : 1;
-    const averageScore = ((mathScore + englishScore + literatureScore) / 3).toFixed(2)
+    const averageScore = ((parseFloat(mathScore.value) + parseFloat(englishScore.value) + parseFloat(literatureScore.value)) / 3).toFixed(2)
     const student = {
         id,
         nameValue: nameValue.value,
@@ -90,7 +90,7 @@ function displayList() {
                 <td>${student.literatureScore}</td>
                 <td>${student.averageScore}</td>
                 <td>
-                    <button onclick="editStudent(${index})">Sửa</button>
+                    <button onclick="updateStudent(${student.id})">Sửa</button>
                     <button onclick="deleteStudent(${index})">Xóa</button>
                 </td>            
     `;
@@ -113,6 +113,14 @@ function updateStudent(idStudent) {
     const literatureScore = document.getElementById('literature');
 
     const studentData = JSON.parse(localStorage.getItem('student'));
+    for(let i of studentData){
+    if(idStudent === i.id ){
+        nameValue.value = i.nameValue
+        mathScore.value = i.mathScore
+        englishScore.value = i.englishScore
+        literatureScore.value = i.literatureScore
+    }
+    }
 
 }
 
